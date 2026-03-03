@@ -1,55 +1,60 @@
 import { motion } from 'framer-motion';
 import { CLIENT } from '../lib/client.config';
 
-// organic-warm Hero — split-screen layout
-// Profile A: food, artesanal, panadería, emprendimiento
+// luxury-dark Hero — editorial serif, background image with luminosity overlay
+// Profile B Premium: clínicas estéticas, legales, alto valor
 
 const Hero = () => {
     return (
-        <section className="relative w-full min-h-[100dvh] flex flex-col md:flex-row items-center bg-secondary overflow-hidden">
+        <section className="relative w-full min-h-[100dvh] flex flex-col justify-center bg-secondary px-6 md:px-12 lg:px-20 overflow-hidden border-b border-primary/5">
 
-            {/* Left: text content */}
-            <div className="relative z-10 flex flex-col justify-center w-full md:w-1/2 px-8 md:px-16 pt-32 pb-16 md:py-0">
+            {/* Background image — luminosity blend, gradient overlay */}
+            <div className="absolute inset-0 z-0 select-none pointer-events-none">
+                <img
+                    src="/images/hero/hero.jpg"
+                    alt={CLIENT.brandName}
+                    className="w-full h-full object-cover object-top opacity-50 grayscale mix-blend-luminosity"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent" />
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 max-w-3xl mt-28 md:mt-48">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
-                    className="flex flex-col items-start"
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 >
-                    <span className="text-accent text-xs tracking-[0.3em] uppercase mb-6 font-medium">
-                        {CLIENT.heroTagline}
-                    </span>
-
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-primary leading-tight mb-6">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl font-serif text-primary mb-8 leading-[1.05] tracking-tight">
                         {CLIENT.brandName}
                     </h1>
 
-                    <p className="text-lg text-muted max-w-md mb-10 font-light leading-relaxed">
+                    <div className="flex items-center gap-6 mb-8 mt-10 md:mt-14">
+                        <div className="w-16 h-[1px] bg-accent" />
+                        <span className="text-accent tracking-[0.2em] uppercase text-xs md:text-sm font-semibold">
+                            {CLIENT.heroTagline}
+                        </span>
+                    </div>
+
+                    <p className="text-lg md:text-xl text-primary/60 mb-12 max-w-xl font-light leading-relaxed">
                         {CLIENT.tagline}
                     </p>
 
-                    <a
-                        href={CLIENT.heroCTA.href}
-                        className="bg-primary text-secondary px-8 py-4 rounded-full text-sm uppercase tracking-widest hover:brightness-110 transition-all duration-300"
-                    >
-                        {CLIENT.heroCTA.label}
-                    </a>
-                </motion.div>
-            </div>
-
-            {/* Right: hero image — transparent overlay on mobile, full on desktop */}
-            <div className="absolute right-0 top-0 w-full md:relative md:w-1/2 h-full opacity-10 md:opacity-100">
-                <motion.div
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1.2 }}
-                    className="w-full h-full"
-                >
-                    <img
-                        src="/images/hero/hero.jpg"
-                        alt={CLIENT.brandName}
-                        className="w-full h-full object-cover object-center md:rounded-l-3xl shadow-2xl"
-                    />
+                    <div className="flex flex-col sm:flex-row gap-5 pb-24 md:pb-12">
+                        <a
+                            href={CLIENT.heroCTA.href}
+                            className="px-10 py-5 bg-accent text-secondary font-bold tracking-widest uppercase text-sm text-center rounded-full transition-all hover:brightness-110 shadow-lg"
+                        >
+                            {CLIENT.heroCTA.label}
+                        </a>
+                        <a
+                            href="#catalog"
+                            className="px-10 py-5 border border-primary/20 text-primary uppercase text-sm tracking-widest font-bold text-center rounded-full transition-colors hover:bg-primary/10"
+                        >
+                            Ver Catálogo
+                        </a>
+                    </div>
                 </motion.div>
             </div>
 

@@ -1,54 +1,49 @@
 import { motion } from 'framer-motion';
 import { CLIENT } from '../lib/client.config';
 
-// organic-warm Catalog — warm rounded cards
-// Profile A: food, artesanal, panadería, emprendimiento
+// luxury-dark Catalog — editorial cards, gold accent line, glassmorphism border
+// Profile B Premium: clínicas estéticas, legales, alto valor
 
 const Catalog = () => {
     return (
-        <section id="catalog" className="py-24 bg-secondary text-primary">
-            <div className="max-w-7xl mx-auto px-6">
+        <section id="catalog" className="py-32 px-6 md:px-20 lg:px-32 bg-secondary text-primary">
+            <div className="max-w-7xl mx-auto">
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="mb-16"
-                >
-                    <span className="text-accent uppercase tracking-[0.2em] text-xs font-semibold mb-4 block">Catálogo</span>
-                    <h2 className="text-4xl md:text-5xl font-serif">Nuestras <span className="italic">Especialidades</span></h2>
-                </motion.div>
+                <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-10 border-b border-primary/10 pb-12">
+                    <div className="max-w-3xl">
+                        <span className="text-accent uppercase tracking-[0.2em] text-xs font-semibold mb-4 block">Catálogo</span>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-primary tracking-tight">
+                            Nuestros Productos
+                        </h2>
+                    </div>
+                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-16">
                     {CLIENT.products.map((item, i) => (
                         <motion.div
                             key={item.id}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.15, duration: 0.5 }}
-                            className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-300 border border-primary/10"
+                            transition={{ delay: i * 0.1, duration: 0.8 }}
+                            className="group cursor-pointer"
                         >
-                            <div className="aspect-[4/3] overflow-hidden relative">
+                            {/* Product image — editorial aspect ratio */}
+                            <div className="aspect-[4/5] rounded-sm overflow-hidden mb-6 relative bg-primary/5 border border-primary/10 group-hover:border-accent/40 transition-colors duration-500">
                                 <img
                                     src={item.image}
                                     alt={item.name}
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                                 />
                             </div>
-                            <div className="p-6">
-                                <h3 className="text-xl font-serif font-bold text-primary leading-tight mb-3">{item.name}</h3>
-                                <p className="text-muted text-sm mb-5 leading-relaxed">{item.desc}</p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-lg font-bold text-accent">{CLIENT.currency}{item.price.toLocaleString()}</span>
-                                    <a
-                                        href="#order"
-                                        className="text-sm font-semibold uppercase tracking-wider text-primary/60 hover:text-accent transition-colors duration-200"
-                                    >
-                                        Encargar →
-                                    </a>
-                                </div>
+
+                            <h3 className="text-2xl font-serif text-primary mb-3 leading-snug">{item.name}</h3>
+                            <p className="text-muted text-sm leading-relaxed font-light mb-5">{item.desc}</p>
+
+                            <div className="flex items-center justify-between">
+                                <span className="text-accent font-medium">{CLIENT.currency}{item.price.toLocaleString()}</span>
+                                {/* Gold underline expands on hover */}
+                                <div className="w-12 h-[1px] bg-accent/30 group-hover:w-24 transition-all duration-700" />
                             </div>
                         </motion.div>
                     ))}
